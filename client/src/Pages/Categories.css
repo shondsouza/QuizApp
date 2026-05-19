@@ -1,0 +1,79 @@
+.categories-page {
+  width: 100%;
+}
+
+.categories-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #1f2937; /* Dark slate */
+  margin-bottom: 32px;
+  margin-top: 0;
+}
+
+.categories-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+.category-card {
+  background-color: white;
+  border-radius: 12px;
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border: 1px solid #f3f4f6;
+  border-left: 4px solid #0d7a5b; /* The teal left border accent */
+}
+
+.category-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
+}
+
+.category-icon-wrapper {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background-color: #e6f4f1; /* Very light teal */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.category-icon {
+  color: #0d7a5b; /* Dark teal */
+  font-size: 1.25rem;
+  font-weight: 700;
+  font-family: monospace;
+}
+
+.js-icon {
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+.category-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.category-content h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #111827; /* Dark text */
+}
+
+.category-content p {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #6b7280; /* Gray text */
+}
