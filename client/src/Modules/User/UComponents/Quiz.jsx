@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
+import "./Quiz.css";
 
 export default function Quiz() {
   const { category } = useParams();
@@ -46,7 +47,10 @@ export default function Quiz() {
     return (
       <div className="quiz-page">
         <div className="quiz-card">
-          <h2 style={{ textAlign: "center" }}>Loading questions...</h2>
+          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "var(--space-lg)", padding: "var(--space-2xl)" }}>
+            <div className="spinner"></div>
+            <h2 style={{ textAlign: "center", color: "var(--text-primary)", margin: 0 }}>Loading questions...</h2>
+          </div>
         </div>
       </div>
     );
@@ -55,22 +59,41 @@ export default function Quiz() {
   if (error || questions.length === 0) {
     return (
       <div className="quiz-page">
-        <div className="quiz-card">
-          <h2 style={{ textAlign: "center" }}>{error || "No questions found for this category."}</h2>
-          <div style={{ textAlign: "center", marginTop: "20px" }}>
-            <button className="quiz-next" onClick={() => navigate('/categories')}>Back</button>
-          </div>
+        <div className="quiz-card quiz-result">
+          <h2 className="quiz-result__title" style={{ color: "var(--error)" }}>Error</h2>
+          <p className="quiz-result__message">{error || "No questions found for this category."}</p>
+          <button className="quiz-next" onClick={() => navigate('/categories')}>Back to Categories</button>
         </div>
       </div>
     );
   }
 
   if (showResult) {
+    const percentage = Math.round((score / questions.length) * 100);
+    let message = "";
+    let messageColor = "var(--text-secondary)";
+
+    if (percentage >= 80) {
+      message = "Excellent work! You're a quiz master! 🎉";
+      messageColor = "var(--success)";
+    } else if (percentage >= 60) {
+      message = "Good job! Keep practicing! 👍";
+      messageColor = "var(--primary)";
+    } else if (percentage >= 40) {
+      message = "Not bad! Room for improvement. 💪";
+      messageColor = "var(--warning)";
+    } else {
+      message = "Keep studying and try again! 📚";
+      messageColor = "var(--error)";
+    }
+
     return (
       <div className="quiz-page">
         <div className="quiz-card quiz-result">
           <h2 className="quiz-result__title">Quiz Completed!</h2>
-          <p className="quiz-result__score">Your Score: <span>{score}</span> / {questions.length}</p>
+          <p className="quiz-result__score">{score}<span>/{questions.length}</span></p>
+          <p className="quiz-result__message" style={{ color: messageColor, fontWeight: 600 }}>{message}</p>
+          <p className="quiz-result__message">You completed the {category.toUpperCase()} quiz.</p>
           <button className="quiz-next" onClick={() => navigate('/categories')}>Back to Categories</button>
         </div>
       </div>
@@ -83,11 +106,15 @@ export default function Quiz() {
     <div className="quiz-page">
       <div className="quiz-card">
         <div className="quiz-card__header">
-          <h1 className="quiz-card__title">{category.toUpperCase()} Quiz</h1>
-          <p className="quiz-card__subtitle">Question {currentIndex + 1} of {questions.length}</p>
+          <p className="quiz-card__subtitle">{category.toUpperCase()} Quiz</p>
+          <h1 className="quiz-card__title">Question {currentIndex + 1}</h1>
+          <div className="quiz-card__meta">
+            <span>Total: <strong>{questions.length}</strong></span>
+            <span>Score: <strong>{score}</strong></span>
+          </div>
         </div>
         
-        <div className="quiz-progress" style={{ marginBottom: "30px" }}>
+        <div className="quiz-progress">
           <div 
             className="quiz-progress__bar" 
             style={{ width: `${((currentIndex + 1) / questions.length) * 100}%` }}
@@ -95,7 +122,7 @@ export default function Quiz() {
         </div>
 
         <h2 className="quiz-question">
-          {currentIndex + 1}. {question.question}
+          {question.question}
         </h2>
 
         <div className="quiz-options">
@@ -105,7 +132,8 @@ export default function Quiz() {
               className={`quiz-option ${selected === option ? "quiz-option--selected" : ""}`}
               onClick={() => setSelected(option)}
             >
-              {option}
+              <span className="quiz-option__letter">{String.fromCharCode(65 + index)}</span>
+              <span className="quiz-option__text">{option}</span>
             </button>
           ))}
         </div>
@@ -116,10 +144,10 @@ export default function Quiz() {
             onClick={handleNext}
             disabled={!selected}
           >
-            {currentIndex + 1 === questions.length ? "Finish Quiz" : "Next Question"}
+            {currentIndex + 1 === questions.length ? "Finish Quiz" : "Next Question →"}
           </button>
         </div>
       </div>
     </div>
   );
-}
+}

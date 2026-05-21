@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
+import Navbar from "./Components/Navbar";
 import UserRoutes from "./Modules/User/URoutes/UserRoutes";
 import AdminRoutes from "./Modules/Admin/ARoutes/AdminRoutes";
 import Login from "./Pages/Login";
@@ -17,6 +18,7 @@ const ProtectedRoute = ({ children }) => {
 function App() {
   return (
     <BrowserRouter>
+      <Navbar />
       <Routes>
         <Route path="/" element={<Navigate to="/login" replace />} />
         <Route path="/login" element={<Login />} />

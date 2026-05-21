@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import "./Categories.css"; // Reuse the admin Categories.css
+import "./Categories.css";
 
 const UserCategories = () => {
   const navigate = useNavigate();
@@ -8,62 +8,46 @@ const UserCategories = () => {
     navigate(`/quiz/${category}`);
   };
 
-  const handleLogout = () => {
-    localStorage.removeItem("user");
-    navigate("/login");
-  };
-
   return (
-    <div className="categories-page" style={{ padding: "40px", maxWidth: "1200px", margin: "0 auto", boxSizing: "border-box" }}>
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "32px" }}>
-        <h1 className="categories-title" style={{ marginBottom: 0 }}>Select a Language</h1>
-        <button 
-          onClick={handleLogout}
-          style={{
-            padding: "8px 16px",
-            backgroundColor: "#ef4444",
-            color: "white",
-            border: "none",
-            borderRadius: "6px",
-            cursor: "pointer",
-            fontWeight: "600"
-          }}
-        >
-          Logout
-        </button>
+    <div className="categories-page simple">
+      <div className="categories-header">
+        <div>
+          <h1 className="categories-title">Choose a Quiz Topic</h1>
+          <p className="categories-subtitle">Select a subject to start learning</p>
+        </div>
       </div>
       
-      <div className="categories-grid">
+      <div className="categories-grid simple">
         {/* HTML Card */}
-        <div className="category-card" onClick={() => handleCategoryClick("html")}>
-          <div className="category-icon-wrapper">
+        <div className="category-card simple html" onClick={() => handleCategoryClick("html")}>
+          <div className="category-icon-wrapper simple">
             <span className="category-icon html-icon">{"</>"}</span>
           </div>
           <div className="category-content">
             <h3>HTML</h3>
-            <p>Click to start quiz</p>
+            <p>Basic web page structure</p>
           </div>
         </div>
 
         {/* CSS Card */}
-        <div className="category-card" onClick={() => handleCategoryClick("css")}>
-          <div className="category-icon-wrapper">
+        <div className="category-card simple css" onClick={() => handleCategoryClick("css")}>
+          <div className="category-icon-wrapper simple">
             <span className="category-icon css-icon">{"{}"}</span>
           </div>
           <div className="category-content">
             <h3>CSS</h3>
-            <p>Click to start quiz</p>
+            <p>Styling and layouts</p>
           </div>
         </div>
 
         {/* JS Card */}
-        <div className="category-card" onClick={() => handleCategoryClick("javascript")}>
-          <div className="category-icon-wrapper">
+        <div className="category-card simple javascript" onClick={() => handleCategoryClick("javascript")}>
+          <div className="category-icon-wrapper simple">
             <span className="category-icon js-icon">JS</span>
           </div>
           <div className="category-content">
-            <h3>JAVASCRIPT</h3>
-            <p>Click to start quiz</p>
+            <h3>JavaScript</h3>
+            <p>Interactive programming</p>
           </div>
         </div>
       </div>

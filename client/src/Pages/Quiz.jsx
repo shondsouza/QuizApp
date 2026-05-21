@@ -111,8 +111,10 @@ export default function Quiz() {
                 type="button"
                 className={`quiz-option ${isSelected ? "quiz-option--selected" : ""}`}
                 onClick={() => handleSelect(option)}
+                disabled={selected !== null}
               >
-                {option}
+                <span className="quiz-option__letter">{String.fromCharCode(65 + i)}</span>
+                <span className="quiz-option__text">{option}</span>
               </button>
             );
           })}

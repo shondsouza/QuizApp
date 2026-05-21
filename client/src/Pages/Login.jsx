@@ -28,6 +28,7 @@ const Login = () => {
   return (
     <div className="auth-container">
       <div className="auth-card">
+        <div className="auth-logo">Q</div>
         <h2 className="auth-title">Welcome Back</h2>
         <p className="auth-subtitle">Login to continue your quiz journey</p>
         
