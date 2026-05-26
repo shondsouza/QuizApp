@@ -16,6 +16,10 @@ const Navbar = () => {
     return null;
   }
 
+  const categoriesActive =
+    location.pathname === "/categories" ||
+    location.pathname.startsWith("/quiz");
+
   return (
     <nav className="navbar">
       <div className="navbar-container">
@@ -27,9 +31,9 @@ const Navbar = () => {
         <div className="navbar-menu">
           {user ? (
             <>
-              <Link 
-                to="/categories" 
-                className={`navbar-link ${location.pathname === "/categories" ? "navbar-link--active" : ""}`}
+              <Link
+                to="/categories"
+                className={`navbar-link ${categoriesActive ? "navbar-link--active" : ""}`}
               >
                 Categories
               </Link>
@@ -42,16 +46,13 @@ const Navbar = () => {
             </>
           ) : (
             <>
-              <Link 
-                to="/login" 
+              <Link
+                to="/login"
                 className={`navbar-link ${location.pathname === "/login" ? "navbar-link--active" : ""}`}
               >
                 Login
               </Link>
-              <Link 
-                to="/register" 
-                className="navbar-link navbar-link--primary"
-              >
+              <Link to="/register" className="navbar-link navbar-link--primary">
                 Register
               </Link>
             </>
