@@ -20,7 +20,4 @@ A simple quiz platform with React frontend and Express/MongoDB backend.
 - Answer feedback and progress tracking
 - Saved quiz results for authenticated users
 
-## Notes
 
-- Backend runs on port `7000` by default
-- Make sure MongoDB is running locally or set `MONGODB_URI` in `server/.env`
